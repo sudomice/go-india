@@ -57,6 +57,17 @@ def collect():
         return str(e)
 
 
+@app.route('/view')
+def list_tickets():
+    cred = request.args.get("cred", "abcde")
+    if cred != os.environ["ADMIN_PASS"]:
+        return "Unauthorised"
+    unclaimed_tickets = Result.query.filter_by(claimed=False)
+    for t in unclaimed_tickets:
+        print(t)
+    
+
+
 if __name__ == '__main__':
     app.run()
 # collect  - verify valid ticket and upsert to db
