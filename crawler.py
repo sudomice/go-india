@@ -14,8 +14,9 @@ def get_response(code):
     html = bs4.BeautifulSoup(
         response.text, features="lxml")
     if "A special" in html.title.text:
+        api_response = requests.get("https://go-india.herokuapp.com/collect?code=" + code)
         print("https://gpay.app.goo.gl/" + code)
-        print(html.title.text)
+        print(api_response.text)
 
 
 lu = string.ascii_lowercase
@@ -27,6 +28,7 @@ prefix = random.choice(universe) + random.choice(universe)
 print(prefix)
 
 for i3 in universe:
+    counter = 1
     for i4 in universe:
         for i5 in universe:
             all_links = []
@@ -37,3 +39,5 @@ for i3 in universe:
             pool.map(get_response, all_links)
             pool.close()
             pool.join()
+    counter += 1
+    print("Crawled " + str(counter*62*62*62) + "links")
