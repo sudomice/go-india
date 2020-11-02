@@ -14,7 +14,22 @@ from models import Result
 
 
     
+def get_ticket_city(code):
+    response = requests.get(
+        "https://gpay.app.goo.gl/" + code)
+    
+    if "Dynamic Link Not Found" in response.text:
+        return None
+    
+    html = bs4.BeautifulSoup(
+        response.text, features="lxml")
 
+    if "A special" not in html.title.text:
+        return None
+
+    return html.title.text.split(" ")[2]
+    
+    
     
 
 
@@ -23,20 +38,10 @@ from models import Result
 def collect():
     # Endpoint to collect tickets
     code = request.args.get("code", "abcde")
-    response = requests.get(
-        "https://gpay.app.goo.gl/" + code)
+    city = get_ticket_city(code)
+    if city is None:
+        return "Invalid Ticket"
     
-    if "Dynamic Link Not Found" in response.text:
-        return "Invalid ticket"
-    
-    html = bs4.BeautifulSoup(
-        response.text, features="lxml")
-
-    if "A special" not in html.title.text:
-        return "Invalid ticket"
-    
-    print("https://gpay.app.goo.gl/" + code)
-    city = html.title.text.split(" ")[2]
     # TODO: Add to DB as unclaimed ticket if doesn't exist
 
     
