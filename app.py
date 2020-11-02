@@ -43,8 +43,13 @@ def collect():
         return "Invalid Ticket"
     
     # TODO: Add to DB as unclaimed ticket if doesn't exist
-
-    
+    try:
+        ticket = Result(code, city, False)
+        db.session.add(ticket)
+        db.session.commit()
+        return "Ticket added. id={}".format(ticket.code)
+    except Exception as e:
+        return str(e)
 
 
 if __name__ == '__main__':
