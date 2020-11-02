@@ -1,14 +1,16 @@
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
+import requests
+import bs4
 import os
 
 
 app = Flask(__name__)
-app.config.from_object(os.environ['APP_SETTINGS'])
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+# app.config.from_object(os.environ['APP_SETTINGS'])
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# db = SQLAlchemy(app)
 
-from models import Result
+# from models import Result
 
 
     
@@ -20,6 +22,7 @@ from models import Result
 @app.route('/collect')
 def collect():
     # Endpoint to collect tickets
+    code = request.args.get("code", "abcde")
     response = requests.get(
         "https://gpay.app.goo.gl/" + code)
     
