@@ -28,10 +28,13 @@ def collect():
     
     html = bs4.BeautifulSoup(
         response.text, features="lxml")
-    if "A special" in html.title.text:
-        print("https://gpay.app.goo.gl/" + code)
-        city = html.title.text.split(" ")[2]
-        # TODO: Add to DB as unclaimed ticket if doesn't exist
+
+    if "A special" not in html.title.text:
+        return "Invalid ticket"
+    
+    print("https://gpay.app.goo.gl/" + code)
+    city = html.title.text.split(" ")[2]
+    # TODO: Add to DB as unclaimed ticket if doesn't exist
 
     
 
