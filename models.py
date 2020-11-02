@@ -5,9 +5,7 @@ from sqlalchemy.dialects.postgresql import BOOLEAN
 class Result(db.Model):
     __tablename__ = 'results'
 
-    id = db.Column(db.Integer, primary_key=True)
-
-    code = db.Column(db.String())
+    code = db.Column(db.String(6), primary_key=True)
     destination = db.Column(db.String())
     claimed = db.Column(BOOLEAN)
 
@@ -17,4 +15,4 @@ class Result(db.Model):
         self.claimed = claimed
 
     def __repr__(self):
-        return '<id {}>'.format(self.id)
+        return '<code {}>'.format(self.code)
