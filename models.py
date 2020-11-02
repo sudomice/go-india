@@ -5,7 +5,7 @@ from sqlalchemy.dialects.postgresql import BOOLEAN
 class Result(db.Model):
     __tablename__ = 'results'
 
-    code = db.Column(db.String(), primary_key=True)
+    code = db.Column(db.String(6), primary_key=True)
     destination = db.Column(db.String())
     claimed = db.Column(BOOLEAN)
 
