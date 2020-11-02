@@ -11,9 +11,32 @@ db = SQLAlchemy(app)
 from models import Result
 
 
-@app.route('/')
-def hello():
-    return "Hello World!"
+    
+
+    
+
+
+
+@app.route('/collect')
+def collect():
+    # Endpoint to collect tickets
+    response = requests.get(
+        "https://gpay.app.goo.gl/" + code)
+    
+    if "Dynamic Link Not Found" in response.text:
+        return "Invalid ticket"
+    
+    html = bs4.BeautifulSoup(
+        response.text, features="lxml")
+
+    if "A special" not in html.title.text:
+        return "Invalid ticket"
+    
+    print("https://gpay.app.goo.gl/" + code)
+    city = html.title.text.split(" ")[2]
+    # TODO: Add to DB as unclaimed ticket if doesn't exist
+
+    
 
 
 if __name__ == '__main__':
