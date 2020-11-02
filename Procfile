@@ -1,1 +1,1 @@
-worker: python brute.py
+web: gunicorn app:app
