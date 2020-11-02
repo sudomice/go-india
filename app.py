@@ -63,9 +63,10 @@ def list_tickets():
     if cred != os.environ["ADMIN_PASS"]:
         return "Unauthorised"
     unclaimed_tickets = Result.query.filter_by(claimed=False)
+    all_t = ""
     for t in unclaimed_tickets:
-        print(t)
-    
+        all_t += t.code
+    return all_t
 
 
 if __name__ == '__main__':
