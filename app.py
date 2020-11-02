@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import requests
 import bs4
@@ -38,6 +38,11 @@ def get_ticket_city(code):
 def collect():
     # Endpoint to collect tickets
     code = request.args.get("code", "abcde")
+    try:
+        if bool(Result.query.filter_by(code=code).first()):
+            return "code exists in db"
+    except:
+        pass
     city = get_ticket_city(code)
     if city is None:
         return "Invalid Ticket"
