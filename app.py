@@ -41,7 +41,7 @@ def collect():
     city = get_ticket_city(code)
     if city is None:
         return "Invalid Ticket"
-    
+    return city
     # TODO: Add to DB as unclaimed ticket if doesn't exist
 
     
