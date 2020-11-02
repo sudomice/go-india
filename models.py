@@ -16,3 +16,10 @@ class Result(db.Model):
 
     def __repr__(self):
         return '<code {}>'.format(self.code)
+
+    def serialize(self):
+        return {
+            'code': self.code,
+            'city': self.city,
+            'claimed': self.claimed
+        }
