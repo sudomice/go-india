@@ -65,7 +65,7 @@ def list_tickets():
     unclaimed_tickets = Result.query.filter_by(claimed=False)
     all_t = ""
     for t in unclaimed_tickets:
-        all_t += t.code
+        all_t += "https://gpay.app.goo.gl/" + t.code + "\n"
     return all_t
 
 
