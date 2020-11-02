@@ -1,7 +1,6 @@
 requests
 bs4
 lxml
-multiprocessing
 flask
 gunicorn
 psycopg2==2.8.4
