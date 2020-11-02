@@ -1,5 +1,5 @@
 from app import db
-from sqlalchemy.dialects.postgresql import JSON
+from sqlalchemy.dialects.postgresql import BOOLEAN
 
 
 class Result(db.Model):
@@ -7,15 +7,14 @@ class Result(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    # Change these ????
-    url = db.Column(db.String())
-    result_all = db.Column(JSON)
-    result_no_stop_words = db.Column(JSON)
+    code = db.Column(db.String())
+    destination = db.Column(db.String())
+    claimed = db.Column(BOOLEAN)
 
-    def __init__(self, url, result_all, result_no_stop_words):
-        self.url = url
-        self.result_all = result_all
-        self.result_no_stop_words = result_no_stop_words
+    def __init__(self, code, destination, claimed):
+        self.code = code
+        self.destination = destination
+        self.claimed = claimed
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
