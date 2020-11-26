@@ -8,3 +8,9 @@ a simple crawler with a backend in heroku to crawl through all possible gpay tic
 $ pip install -r --user requirements.txt
 $ python crawler.py
 ```
+
+## view the unclaimed tickets
+
+```
+GET https://go-india.herokuapp.com/view?cred=<secret>
+```
